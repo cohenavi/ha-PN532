@@ -11,7 +11,8 @@ logger:
 
 # Enable Home Assistant API (Crucial: this is how the tag scans reach Home Assistant)
 api:
-
+  encryption:
+    key: "API KEY HERE"
 ota:
 
 # 1. Define the I2C Bus using standard ESP32 GPIO pins
