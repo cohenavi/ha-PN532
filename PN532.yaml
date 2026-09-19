@@ -1,0 +1,29 @@
+esphome:
+  name: nfc-reader
+  board: esp32dev # Change this if you are using a specific variant (e.g., d1_mini, nodemcu-32s)
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+
+# Enable logging (useful for troubleshooting)
+logger:
+
+# Enable Home Assistant API (Crucial: this is how the tag scans reach Home Assistant)
+api:
+
+ota:
+
+# 1. Define the I2C Bus using standard ESP32 GPIO pins
+i2c:
+  sda: 21
+  scl: 22
+  scan: true
+
+# 2. Setup the PN532 to send scans directly to Home Assistant
+pn532_i2c:
+  id: pn532_board
+  update_interval: 1s
+  on_tag:
+    then:
+      - homeassistant.tag_scanned: !lambda 'return x;'
